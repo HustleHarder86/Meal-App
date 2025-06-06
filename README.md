@@ -18,6 +18,7 @@ This is a simple web app for managing recipes tailored for women with gestationa
    - `AIRTABLE_BASE_ID` – the base ID (not the name) containing the recipes.
    - `AIRTABLE_TABLE_NAME` – (optional) table name, defaults to `Recipes`.
    - `AIRTABLE_VIEW_NAME` – (optional) Airtable view to query, defaults to `Grid view`.
+   - `LOG_LEVEL` – (optional) log verbosity (e.g., `info`, `debug`). Defaults to `info`.
 
 By default the server queries the **Grid view**. Set `AIRTABLE_VIEW_NAME` if you need to use a different view.
 

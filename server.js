@@ -2,12 +2,19 @@ const express = require('express');
 const Airtable = require('airtable');
 const cors = require('cors');
 const path = require('path');
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.simple(),
+  transports: [new winston.transports.Console()]
+});
 const viewName = process.env.AIRTABLE_VIEW_NAME || 'Grid view';
 
 const requiredEnv = ['AIRTABLE_API_KEY', 'AIRTABLE_BASE_ID'];
 const missing = requiredEnv.filter(key => !process.env[key]);
 if (missing.length) {
-  console.error(`Missing required environment variable${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`);
+  logger.error(`Missing required environment variable${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`);
   process.exit(1);
 }
 
@@ -29,7 +36,7 @@ app.get('/api/recipes', async (req, res) => {
     }
     res.json(filtered);
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Failed to fetch recipes' });
   }
 });
@@ -41,5 +48,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  logger.info(`Server listening on port ${port}`);
 });
