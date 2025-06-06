@@ -2,6 +2,7 @@ const express = require('express');
 const Airtable = require('airtable');
 const cors = require('cors');
 const path = require('path');
+const viewName = process.env.AIRTABLE_VIEW_NAME || 'Grid view';
 
 const app = express();
 app.use(cors());
@@ -13,7 +14,7 @@ const tableName = process.env.AIRTABLE_TABLE_NAME || 'Recipes';
 app.get('/api/recipes', async (req, res) => {
   const filter = req.query.tag;
   try {
-    const records = await base(tableName).select().all();
+    const records = await base(tableName).select({ view: viewName }).all();
     const recipes = records.map(rec => ({ id: rec.id, ...rec.fields }));
     let filtered = recipes;
     if (filter) {
