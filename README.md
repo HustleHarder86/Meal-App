@@ -13,6 +13,7 @@ This is a simple web app for managing recipes tailored for women with gestationa
    ```bash
    npm install
    ```
+   You must run this before starting the server or the app will fail to launch.
 2. Set the following environment variables:
    - `AIRTABLE_API_KEY` – your Airtable API key (**do not commit secrets to git**).
    - `AIRTABLE_BASE_ID` – the base ID (not the name) containing the recipes.
@@ -26,6 +27,8 @@ By default the server queries the **Grid view**. Set `AIRTABLE_VIEW_NAME` if you
    node server.js
    ```
    The app will run on `http://localhost:3000`.
+   Running `npm start` performs a prestart check that warns if `node_modules`
+   has not been installed.
 
 ## Airtable Schema
 The Airtable table should contain fields:
