@@ -13,7 +13,9 @@ const tableName = process.env.AIRTABLE_TABLE_NAME || 'Recipes';
 app.get('/api/recipes', async (req, res) => {
   const filter = req.query.tag;
   try {
+    console.log(`Querying table ${tableName} in base ${process.env.AIRTABLE_BASE_ID}`);
     const records = await base(tableName).select().all();
+    console.log(`Retrieved ${records.length} records`);
     const recipes = records.map(rec => ({ id: rec.id, ...rec.fields }));
     let filtered = recipes;
     if (filter) {
@@ -21,7 +23,7 @@ app.get('/api/recipes', async (req, res) => {
     }
     res.json(filtered);
   } catch (err) {
-    console.error(err);
+    console.error('Error fetching records:', err.message);
     res.status(500).json({ error: 'Failed to fetch recipes' });
   }
 });
