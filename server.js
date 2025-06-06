@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const Airtable = require('airtable');
 const cors = require('cors');
