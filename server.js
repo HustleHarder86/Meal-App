@@ -4,10 +4,13 @@ const cors = require('cors');
 const path = require('path');
 const viewName = process.env.AIRTABLE_VIEW_NAME || 'Grid view';
 
+// Ensure the required Airtable configuration is present before starting the app
 const requiredEnv = ['AIRTABLE_API_KEY', 'AIRTABLE_BASE_ID'];
 const missing = requiredEnv.filter(key => !process.env[key]);
 if (missing.length) {
-  console.error(`Missing required environment variable${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`);
+  console.error(
+    `Missing required environment variable${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`
+  );
   process.exit(1);
 }
 
@@ -15,7 +18,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID);
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+  process.env.AIRTABLE_BASE_ID
+);
 const tableName = process.env.AIRTABLE_TABLE_NAME || 'Recipes';
 
 app.get('/api/recipes', async (req, res) => {
