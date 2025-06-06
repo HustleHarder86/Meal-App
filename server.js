@@ -3,6 +3,13 @@ const Airtable = require('airtable');
 const cors = require('cors');
 const path = require('path');
 
+const requiredEnv = ['AIRTABLE_API_KEY', 'AIRTABLE_BASE_ID'];
+const missing = requiredEnv.filter(key => !process.env[key]);
+if (missing.length) {
+  console.error(`Missing required environment variable${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`);
+  process.exit(1);
+}
+
 const app = express();
 app.use(cors());
 app.use(express.json());
