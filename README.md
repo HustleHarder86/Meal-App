@@ -13,7 +13,11 @@ This is a simple web app for managing recipes tailored for women with gestationa
    ```bash
    npm install
    ```
-2. Set the following environment variables:
+2. Copy `.env.example` to `.env` and edit the values:
+   ```bash
+   cp .env.example .env
+   ```
+   Then set the following environment variables in `.env`:
    - `AIRTABLE_API_KEY` – your Airtable API key (**do not commit secrets to git**).
    - `AIRTABLE_BASE_ID` – the base ID (not the name) containing the recipes.
    - `AIRTABLE_TABLE_NAME` – (optional) table name, defaults to `Recipes`.
