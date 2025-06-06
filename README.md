@@ -17,6 +17,7 @@ This is a simple web app for managing recipes tailored for women with gestationa
    - `AIRTABLE_API_KEY` – your Airtable API key (**do not commit secrets to git**).
    - `AIRTABLE_BASE_ID` – the base ID (not the name) containing the recipes.
    - `AIRTABLE_TABLE_NAME` – (optional) table name, defaults to `Recipes`.
+   - `AIRTABLE_VIEW_NAME` – (optional) view name for selecting records, defaults to `Grid view`.
 3. Start the server:
    ```bash
    node server.js
